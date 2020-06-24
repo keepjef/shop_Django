@@ -1,18 +1,21 @@
 from django.db import models
 
+
 class Category(models.Model):
-    name = models.CharField(max_length=200, db_index=True)
+    title = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('title',)
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
+
 class Product(models.Model):
+    carts = models.ManyToManyField('Cart', related_name='carts', verbose_name='Корзина')
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     title = models.CharField(max_length=200, db_index=True)
     description = models.TextField(max_length=2000, db_index=True)
@@ -23,14 +26,17 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Cart(models.Model):
-    pass
+    title = models.CharField(max_length=100)
+
 
 class ElementofCart(models.Model):
     pass
 
+
 class User(models.Model):
     pass
+

@@ -1,3 +1,22 @@
 from django.shortcuts import render
+from .models import Product, Cart
+from django.views.generic import ListView
 
-# Create your views here.
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'product_list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = Product.objects.all()
+        return context
+
+
+class CartListView(ListView):
+    model = Product
+    template_name = 'cart.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['items'] = Cart.objects.all()
+        return context
+
