@@ -1,0 +1,16 @@
+.git/*
+.idea/*
+/node_modules/*
+
+**/migrations/*
+!**/migrations/__init__.py
+/static/*
+/media/*
+
+**/__pycache__/*
+*.pyc
+*.sqlite3
+gulpfile.js
+*/gulpfile.js
+
+shop_Django/local.py
