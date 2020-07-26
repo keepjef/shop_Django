@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Cart
+from .models import Product
 from django.views.generic import ListView
 
 
@@ -11,12 +11,8 @@ class ProductListView(ListView):
         context['products'] = Product.objects.all()
         return context
 
-
 class CartListView(ListView):
-    model = Product
-    template_name = 'cart.html'
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['items'] = Cart.objects.all()
+        context['products'] = Product.objects.all()
         return context
-
